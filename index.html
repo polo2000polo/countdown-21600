@@ -29,6 +29,19 @@
       margin-top: 10px;
       color: #555;
     }
+
+    #author {
+      font-weight: bold;
+      color: black;
+      border: 2px solid #007BFF;
+      display: inline-block;
+      padding: 8px 16px;
+      margin-top: 30px;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      border-radius: 8px;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -36,6 +49,9 @@
   <h1>Countdown to 2160 Hours (90 Days)</h1>
   <div class="countdown" id="timer">Loading…</div>
   <div class="label">Days : Hours : Minutes : Seconds</div>
+
+  <!-- إضافة اسم المستخدم هنا -->
+  <div id="author">@Muradalmadani1</div>
 
   <script>
     const target = Date.now() + 2160 * 60 * 60 * 1000;
