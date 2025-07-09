@@ -1,29 +1,70 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>العداد التنازلي – 2160 ساعة</title>
+  <title>Countdown Timer – 2160 Hours</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; background: #f8f9fa; color: #333; }
-    .countdown { font-size: 48px; margin-top: 20px; font-weight: bold; }
+    body {
+      background-color: #f4f8fc;
+      color: #333;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .countdown {
+      font-size: 64px;
+      font-weight: bold;
+      color: #007BFF; /* الأزرق المميز */
+      letter-spacing: 8px;
+    }
+
+    .label {
+      font-size: 16px;
+      margin-top: 10px;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <h1>العداد التنازلي – 2160 ساعة</h1>
-  <div class="countdown" id="timer">جارٍ التحميل…</div>
+
+  <h1>Countdown to 2160 Hours (90 Days)</h1>
+  <div class="countdown" id="timer">Loading…</div>
+  <div class="label">Days : Hours : Minutes : Seconds</div>
+
   <script>
     const target = Date.now() + 2160 * 60 * 60 * 1000;
-    function upd() {
-      const d = target - Date.now();
-      if (d <= 0) { document.getElementById("timer").textContent = "انتهى الوقت!"; clearInterval(id); return; }
-      const days = Math.floor(d / (86400000));
-      const hrs = Math.floor((d % 86400000) / 3600000);
-      const mins = Math.floor((d % 3600000) / 60000);
-      const secs = Math.floor((d % 60000) / 1000);
-      document.getElementById("timer").textContent = `${days} يوم · ${hrs} س · ${mins} د · ${secs} ث`;
+
+    function pad(num) {
+      return String(num).padStart(2, '0');
     }
-    const id = setInterval(upd, 1000);
-    upd();
+
+    function updateTimer() {
+      const now = Date.now();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").textContent = "00 : 00 : 00 : 00";
+        clearInterval(intervalId);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const timerStr = `${pad(days)} : ${pad(hours)} : ${pad(minutes)} : ${pad(seconds)}`;
+      document.getElementById("timer").textContent = timerStr;
+    }
+
+    const intervalId = setInterval(updateTimer, 1000);
+    updateTimer();
   </script>
 </body>
 </html>
