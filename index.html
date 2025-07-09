@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Countdown Timer – 2160 Hours</title>
   <style>
     body {
@@ -11,25 +11,21 @@
       text-align: center;
       padding-top: 100px;
     }
-
     h1 {
       font-size: 32px;
       margin-bottom: 40px;
     }
-
     .countdown {
       font-size: 64px;
       font-weight: bold;
-      color: #007BFF; /* الأزرق المميز */
+      color: #007BFF;
       letter-spacing: 8px;
     }
-
     .label {
       font-size: 16px;
       margin-top: 10px;
       color: #555;
     }
-
     #author {
       font-weight: bold;
       color: black;
@@ -42,19 +38,34 @@
       border-radius: 8px;
       user-select: none;
     }
+    #music-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
-
   <h1>Countdown to 2160 Hours (90 Days)</h1>
   <div class="countdown" id="timer">Loading…</div>
   <div class="label">Days : Hours : Minutes : Seconds</div>
-
-  <!-- إضافة اسم المستخدم هنا -->
   <div id="author">@Muradalmadani1</div>
 
+  <!-- زر تشغيل الموسيقى -->
+  <button id="music-button">🎵 تشغيل الموسيقى</button>
+  <audio id="bg-music" src="background-music.mp3" loop></audio>
+
   <script>
-    const target = Date.now() + 2160 * 60 * 60 * 1000;
+    // التاريخ الثابت: 7 أكتوبر 2025، الساعة 12:00 ظهرًا بتوقيت السعودية
+    const target = new Date("2025-10-07T12:00:00+03:00").getTime();
 
     function pad(num) {
       return String(num).padStart(2, '0');
@@ -81,6 +92,20 @@
 
     const intervalId = setInterval(updateTimer, 1000);
     updateTimer();
+
+    // تشغيل / إيقاف الموسيقى
+    const musicButton = document.getElementById('music-button');
+    const bgMusic = document.getElementById('bg-music');
+
+    musicButton.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicButton.textContent = '🔇 إيقاف الموسيقى';
+      } else {
+        bgMusic.pause();
+        musicButton.textContent = '🎵 تشغيل الموسيقى';
+      }
+    });
   </script>
 </body>
 </html>
