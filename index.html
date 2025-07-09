@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>العداد التنازلي – 2160 ساعة</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; background: #f8f9fa; color: #333; }
+    .countdown { font-size: 48px; margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>العداد التنازلي – 2160 ساعة</h1>
+  <div class="countdown" id="timer">جارٍ التحميل…</div>
+  <script>
+    const target = Date.now() + 2160 * 60 * 60 * 1000;
+    function upd() {
+      const d = target - Date.now();
+      if (d <= 0) { document.getElementById("timer").textContent = "انتهى الوقت!"; clearInterval(id); return; }
+      const days = Math.floor(d / (86400000));
+      const hrs = Math.floor((d % 86400000) / 3600000);
+      const mins = Math.floor((d % 3600000) / 60000);
+      const secs = Math.floor((d % 60000) / 1000);
+      document.getElementById("timer").textContent = `${days} يوم · ${hrs} س · ${mins} د · ${secs} ث`;
+    }
+    const id = setInterval(upd, 1000);
+    upd();
+  </script>
+</body>
+</html>
